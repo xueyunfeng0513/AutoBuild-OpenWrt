@@ -19,8 +19,8 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@master
-      with:
-        fetch-depth: 0
+      # with:
+      #   fetch-depth: 0
       
     # - name: 释放磁盘空间
     #   uses: jlumbroso/free-disk-space@main
@@ -60,11 +60,11 @@ jobs:
         cd openwrt
         echo "src-git ssrp https://github.com/fw876/helloworld.git" >> ./feeds.conf.default
 
-    - name: Cache
-      uses: klever1988/cachewrtbuild@main
-      with:
-        ccache: 'true'
-        prefix: ${{ github.workspace }}/openwrt
+    # - name: Cache
+    #   uses: klever1988/cachewrtbuild@main
+    #   with:
+    #     ccache: 'true'
+    #     prefix: ${{ github.workspace }}/openwrt
         
     - name: Update & Install feeds
       working-directory: ./openwrt
