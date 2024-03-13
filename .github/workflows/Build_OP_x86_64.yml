@@ -19,10 +19,7 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@master
-      # with:
-      #   ref: master
-      #   fetch-depth: 0
-      
+
     # - name: 释放磁盘空间
     #   uses: jlumbroso/free-disk-space@main
     #   with:
@@ -51,7 +48,6 @@ jobs:
         uglifyjs upx-ucl unzip vim wget xmlto xxd zlib1g-dev
         sudo -E apt-get -y autoremove --purge
         sudo -E apt-get clean
-
     - name: Clone source code
       env: 
         REPO_URL: https://github.com/coolsnowwolf/lede
@@ -60,7 +56,6 @@ jobs:
         git clone --depth 1 $REPO_URL -b $REPO_BRANCH openwrt
         cd openwrt
         echo "src-git ssrp https://github.com/fw876/helloworld.git" >> ./feeds.conf.default
-
     # - name: Cache
     #   uses: klever1988/cachewrtbuild@main
     #   with:
@@ -73,7 +68,6 @@ jobs:
         ./scripts/feeds update -a
         ./scripts/feeds install -a
         # ./scripts/feeds install -a
-
     #- name: Import external feeds - passwall
     #  working-directory: ./openwrt
     #  run: |
@@ -99,13 +93,11 @@ jobs:
         make download -j$(nproc)
         find dl -size -1024c -exec ls -l {} \;
         find dl -size -1024c -exec rm -f {} \;
-
     - name: Build firmware
       working-directory: ./openwrt
       run: |
         echo -e "$(nproc) thread build."
         make -j$(nproc) V=s
-
     - name : Upload artifact
       uses: actions/upload-artifact@master
       with:
