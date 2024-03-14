@@ -59,8 +59,8 @@ jobs:
     - name: Cache
       uses: klever1988/cachewrtbuild@main
       with:
-        ccache: 'false'
-        clean: 'false'
+        ccache: 'true'
+        # clean: 'false'
         prefix: ${{ github.workspace }}/openwrt
         
     - name: Update & Install feeds
